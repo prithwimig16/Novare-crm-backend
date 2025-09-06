@@ -50,12 +50,13 @@ public class NovareRegistrationService {
         return "Doctor registered successfully";
     }
 
-    private void registerMember(UserRequest request, String keycloakUserId) {
+    @Transactional
+    public String registerMember(UserRequest request, String keycloakUserId) {
         MemberProfile profile = MemberProfile.builder()
                 .keycloakUserId(keycloakUserId)
                 .age(request.getAge())
                 .gender(request.getGender())
-                .emergencyContact(request.getFirstName())
+                .emergencyContact(request.getPhoneNumber())
                 .build();
 
         memberProfileRepository.save(profile);
@@ -71,6 +72,7 @@ public class NovareRegistrationService {
                 .build();
 
         userRepository.save(user);
+        return "Member registered successfully";
     }
 
 

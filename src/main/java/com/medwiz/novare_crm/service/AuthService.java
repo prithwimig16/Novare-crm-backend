@@ -131,7 +131,7 @@ public class AuthService {
             // Step 2: Save to DB (use String, not UUID)
             return switch (request.getRole()) {
                 case DOCTOR -> novareRegistrationService.registerDoctor((DoctorUserRequest) request, keycloakUserId);
-                case MEMBER -> novareRegistrationService.registerUser(request, keycloakUserId);
+                case MEMBER -> novareRegistrationService.registerMember(request, keycloakUserId);
                 case ADMIN -> novareRegistrationService.registerAdmin(request, keycloakUserId);
                 default -> throw new RegistrationException("Unsupported role: " + request.getRole());
             };
