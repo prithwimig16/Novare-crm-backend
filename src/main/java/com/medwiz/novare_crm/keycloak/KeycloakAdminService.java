@@ -1,5 +1,6 @@
 package com.medwiz.novare_crm.keycloak;
 
+import com.medwiz.novare_crm.enums.Role;
 import com.medwiz.novare_crm.exception.RegistrationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -238,7 +239,7 @@ public class KeycloakAdminService {
     /**
      * Assign a realm role to a Keycloak user
      */
-    public void assignRole(String userId, String roleName) {
+    public void assignRole(String userId, Role roleName) {
         String token = getAdminToken();
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);

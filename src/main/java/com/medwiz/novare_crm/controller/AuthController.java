@@ -73,10 +73,11 @@ public class AuthController {
         return ResponseEntity.ok(ApiResponse.ok("Logout successful", "Success"));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register/user")
     public ResponseEntity<ApiResponse<String>> registerUser(@RequestBody @Valid UserRequest request) {
         return ResponseEntity.ok(ApiResponse.ok(authService.registerUser(request), "User registered"));
     }
+
 
     @DeleteMapping("/keycloak/{userId}")
     @PreAuthorize("hasRole('ADMIN')")

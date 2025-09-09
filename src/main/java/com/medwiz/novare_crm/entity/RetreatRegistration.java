@@ -2,7 +2,7 @@ package com.medwiz.novare_crm.entity;
 
 import com.medwiz.novare_crm.enums.Gender;
 import com.medwiz.novare_crm.enums.Goal;
-import com.medwiz.novare_crm.enums.Mode;
+import com.medwiz.novare_crm.enums.PreferredMode;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +31,7 @@ public class RetreatRegistration {
     private MemberProfile member;
 
     @Enumerated(EnumType.STRING)
-    private Mode preferredMode;
+    private PreferredMode preferredMode;
 
     @Column(length = 1000)
     private String additionalDetails;

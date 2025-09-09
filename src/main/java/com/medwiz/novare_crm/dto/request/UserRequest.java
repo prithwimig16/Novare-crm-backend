@@ -1,6 +1,8 @@
 package com.medwiz.novare_crm.dto.request;
 
 import com.medwiz.novare_crm.enums.Gender;
+import com.medwiz.novare_crm.enums.Goal;
+import com.medwiz.novare_crm.enums.PreferredMode;
 import com.medwiz.novare_crm.enums.Role;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -41,8 +43,6 @@ public class UserRequest {
     @Min(0)
     private int age;
 
-
-    private String hospitalId;
 
 }
 

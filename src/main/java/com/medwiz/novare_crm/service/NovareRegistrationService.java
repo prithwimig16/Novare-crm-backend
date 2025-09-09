@@ -1,4 +1,5 @@
 package com.medwiz.novare_crm.service;
+
 import com.medwiz.novare_crm.dto.request.DoctorUserRequest;
 import com.medwiz.novare_crm.dto.request.UserRequest;
 import com.medwiz.novare_crm.entity.Doctor;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Slf4j
 @Service
@@ -46,7 +46,7 @@ public class NovareRegistrationService {
                 .isActive(true)
                 .build();
 
-         doctorRepository.save(doctor);
+        doctorRepository.save(doctor);
         return "Doctor registered successfully";
     }
 

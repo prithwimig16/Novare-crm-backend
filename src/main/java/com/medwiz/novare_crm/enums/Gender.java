@@ -1,7 +1,8 @@
 package com.medwiz.novare_crm.enums;
 
 public enum Gender {
-    MALE,
-    FEMALE,
-    TRANSGENDER
+    MAN,
+    WOMAN,
+    OTHER,
+    PREFER_NOT_TO_SAY
 }
