@@ -26,4 +26,8 @@ public class MemberProfile {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RetreatRegistration> registrations;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "keycloakUserId", referencedColumnName = "id", insertable = false, updatable = false)
+    private User user;
 }
