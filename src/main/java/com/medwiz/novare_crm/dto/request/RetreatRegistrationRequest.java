@@ -12,7 +12,6 @@ public record RetreatRegistrationRequest(
         String password,
         int age,
         Gender gender,
-        String emergencyContact,
         Goal goal,
         PreferredMode preferredMode,
         String additionalDetails

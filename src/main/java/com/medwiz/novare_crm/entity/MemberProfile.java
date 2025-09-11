@@ -22,7 +22,7 @@ public class MemberProfile {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private String emergencyContact;
+    private String phone;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RetreatRegistration> registrations;

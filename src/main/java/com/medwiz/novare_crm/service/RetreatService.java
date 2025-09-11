@@ -77,6 +77,7 @@ public class RetreatService {
                 .firstname(request.firstName())
                 .lastname(request.lastName())
                 .phoneNumber(request.phoneNumber())
+                .email(request.email())
                 .isActive(true)
                 .isVerified(false)
                 .createdAt(LocalDateTime.now())
@@ -88,18 +89,20 @@ public class RetreatService {
         MemberProfile profile = MemberProfile.builder()
                 .keycloakUserId(keycloakUserId)
                 .age(request.age())
+                .phone(request.phoneNumber())
                 .gender(request.gender())
-                .emergencyContact(request.emergencyContact())
                 .build();
         return memberProfileRepository.save(profile);
     }
 
     private void saveRetreatRegistration(MemberProfile profile, RetreatRegistrationRequest request) {
         RetreatRegistration registration = RetreatRegistration.builder()
+                .keycloakUserId(profile.getKeycloakUserId())
                 .member(profile)
                 .goal(request.goal())
                 .preferredMode(request.preferredMode())
                 .additionalDetails(request.additionalDetails())
+                .gender(request.gender())
                 .age(request.age())
                 .build();
         retreatRegistrationRepository.save(registration);

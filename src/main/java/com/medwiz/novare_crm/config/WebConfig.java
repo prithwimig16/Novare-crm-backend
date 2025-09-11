@@ -23,7 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/**") // Apply to all protected APIs
                 .excludePathPatterns(
                         "/api/v1/auth/**",     // exclude login, register, otp
-                        "/api/v1/home/**",
+                        "/api/v1/retreats/**",
                         "/swagger-ui/**",      // optional: exclude Swagger
                         "/v3/api-docs/**",     // optional: exclude Swagger docs
                         "/actuator/**",        // optional: exclude health checks
@@ -34,10 +34,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/v1/auth/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET")
-                .allowedHeaders("Range", "Content-Type")
-                .exposedHeaders("Content-Range", "Accept-Ranges", "Content-Length");
+//        registry.addMapping("/api/v1/auth/**")
+//                .allowedOrigins("*")
+//                .allowedMethods("GET")
+//                .allowedHeaders("Range", "Content-Type")
+//                .exposedHeaders("Content-Range", "Accept-Ranges", "Content-Length");
     }
 }

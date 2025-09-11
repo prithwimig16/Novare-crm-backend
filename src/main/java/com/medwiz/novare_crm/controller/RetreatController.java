@@ -18,6 +18,7 @@ public class RetreatController {
     /**
      * First-time member registers with retreat
      */
+
     @PostMapping("/register-first")
     public ResponseEntity<ApiResponse<String>> registerMemberForFirstRetreat(
             @RequestBody @Valid RetreatRegistrationRequest request

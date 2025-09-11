@@ -56,7 +56,7 @@ public class NovareRegistrationService {
                 .keycloakUserId(keycloakUserId)
                 .age(request.getAge())
                 .gender(request.getGender())
-                .emergencyContact(request.getPhoneNumber())
+                .phone(request.getPhoneNumber())
                 .build();
 
         memberProfileRepository.save(profile);
