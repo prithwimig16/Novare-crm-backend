@@ -2,6 +2,7 @@ package com.medwiz.novare_crm.entity;
 
 import com.medwiz.novare_crm.enums.Gender;
 import com.medwiz.novare_crm.enums.Goal;
+import com.medwiz.novare_crm.enums.PaymentStatus;
 import com.medwiz.novare_crm.enums.PreferredMode;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,9 @@ public class RetreatRegistration {
     @Enumerated(EnumType.STRING)
     private Goal goal;
 
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+
     @ManyToOne
     @JoinColumn(name = "member_id", referencedColumnName = "keycloakUserId")
     private MemberProfile member;
@@ -40,4 +44,8 @@ public class RetreatRegistration {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    private String transactionId;
+
+
 }

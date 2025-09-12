@@ -10,6 +10,7 @@ public record RetreatRegistrationRequest(
         String phoneNumber,
         String email,
         String password,
+        String city,
         int age,
         Gender gender,
         Goal goal,

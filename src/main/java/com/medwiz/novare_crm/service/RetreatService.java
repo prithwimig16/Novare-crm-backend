@@ -86,6 +86,7 @@ public class RetreatService {
                 .firstname(request.firstName())
                 .lastname(request.lastName())
                 .role(role)
+                .city(request.city())
                 .phoneNumber(request.phoneNumber())
                 .email(request.email())
                 .isActive(true)
@@ -99,6 +100,7 @@ public class RetreatService {
         MemberProfile profile = MemberProfile.builder()
                 .keycloakUserId(keycloakUserId)
                 .age(request.age())
+                .city(request.city())
                 .phone(request.phoneNumber())
                 .gender(request.gender())
                 .build();
@@ -179,6 +181,7 @@ public class RetreatService {
                 .id(r.getId())
                 .phone(r.getMember().getPhone())
                 .goal(r.getGoal())
+                .city(r.getMember().getCity())
                 .preferredMode(r.getPreferredMode())
                 .additionalDetails(r.getAdditionalDetails())
                 .age(r.getAge())

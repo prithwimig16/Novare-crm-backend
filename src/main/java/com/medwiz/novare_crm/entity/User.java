@@ -19,6 +19,7 @@ public class User {
     private String lastname;
     private String phoneNumber;
     private String email;
+    private String city;
     private boolean isVerified;
     private boolean isActive;
     private Role role;

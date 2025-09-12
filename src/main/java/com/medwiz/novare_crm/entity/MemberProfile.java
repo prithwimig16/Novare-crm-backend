@@ -24,6 +24,8 @@ public class MemberProfile {
 
     private String phone;
 
+    private String city;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RetreatRegistration> registrations;
 

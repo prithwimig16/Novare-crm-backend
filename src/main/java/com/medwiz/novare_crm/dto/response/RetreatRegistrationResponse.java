@@ -11,6 +11,7 @@ public record RetreatRegistrationResponse(
         UUID id,
         String phone,
         Goal goal,
+        String city,
         PreferredMode preferredMode,
         String additionalDetails,
         int age,
