@@ -21,18 +21,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ApiResponse.error("Invalid path parameter."), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(LoginException.class)
+    public ResponseEntity<ApiResponse<Object>> handleLoginException(LoginException ex) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED) // 401
+                .body(ApiResponse.error(ex.getMessage()));
+    }
+
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<Void>> handleGeneral(Exception ex) {
-        ex.printStackTrace(); // You can log this instead
-        return new ResponseEntity<>(
-                ApiResponse.<Void>builder()
-                        .success(false)
-                        .message("Something went wrong.")
-                        .data(null)
-                        .timestamp(LocalDateTime.now())
-                        .build(),
-                HttpStatus.INTERNAL_SERVER_ERROR
-        );
+    public ResponseEntity<ApiResponse<Object>> handleGenericException(Exception ex) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR) // 500
+                .body(ApiResponse.error("Something went wrong!"));
     }
 }
 

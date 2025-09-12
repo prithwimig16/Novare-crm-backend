@@ -1,6 +1,7 @@
 package com.medwiz.novare_crm.keycloak;
 
 import com.medwiz.novare_crm.enums.Role;
+import com.medwiz.novare_crm.exception.LoginException;
 import com.medwiz.novare_crm.exception.RegistrationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -312,7 +313,12 @@ public class KeycloakAdminService {
 
         } catch (HttpClientErrorException ex) {
             log.error("❌ Failed to fetch token for user {}: {}", username, ex.getMessage());
-            throw new RegistrationException("Failed to login via Keycloak", ex);
+
+            String responseBody = ex.getResponseBodyAsString();
+            if(ex.getStatusText().equals("Unauthorized")){
+                throw new LoginException("Wrong username or password!", ex);
+            }
+            throw new LoginException("Authentication server unavailable!", ex);
         }
 
     }

@@ -9,7 +9,7 @@ import java.util.UUID;
 @Builder
 public record RetreatRegistrationResponse(
         UUID id,
-        String keycloakUserId,
+        String phone,
         Goal goal,
         PreferredMode preferredMode,
         String additionalDetails,

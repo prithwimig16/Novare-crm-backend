@@ -55,7 +55,7 @@ public class RetreatService {
             keycloakAdminService.assignRole(keycloakUserId, Role.DOCTOR);
 
             // Save User
-            User user = saveUserEntity(keycloakUserId, request);
+            User user = saveUserEntity(keycloakUserId, request,Role.MEMBER);
             // Save Profile
             MemberProfile profile = saveMemberProfile(keycloakUserId, request);
             // Save RetreatRegistration
@@ -80,11 +80,12 @@ public class RetreatService {
         return "Retreat registered successfully";
     }
 
-    private User saveUserEntity(String keycloakUserId, RetreatRegistrationRequest request) {
+    private User saveUserEntity(String keycloakUserId, RetreatRegistrationRequest request,Role role) {
         User user = User.builder()
                 .id(keycloakUserId)
                 .firstname(request.firstName())
                 .lastname(request.lastName())
+                .role(role)
                 .phoneNumber(request.phoneNumber())
                 .email(request.email())
                 .isActive(true)
@@ -176,7 +177,7 @@ public class RetreatService {
 
         return RetreatRegistrationResponse.builder()
                 .id(r.getId())
-                .keycloakUserId(r.getKeycloakUserId())
+                .phone(r.getMember().getPhone())
                 .goal(r.getGoal())
                 .preferredMode(r.getPreferredMode())
                 .additionalDetails(r.getAdditionalDetails())

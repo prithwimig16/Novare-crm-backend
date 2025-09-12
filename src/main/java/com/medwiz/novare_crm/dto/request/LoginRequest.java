@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class LoginRequest {
 
     @NotBlank(message = "Username number is required")
-    private String phoneNumber;
+    private String contact;
 
     @NotBlank(message = "Password is required")
     private String password;

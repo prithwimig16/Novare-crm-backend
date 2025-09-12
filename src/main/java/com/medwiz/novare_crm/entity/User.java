@@ -14,15 +14,14 @@ import java.util.UUID;
 @Builder
 public class User {
     @Id
-    private String id;// Keycloak "sub", a String
-
+    private String id;
     private String firstname;
     private String lastname;
     private String phoneNumber;
     private String email;
     private boolean isVerified;
     private boolean isActive;
-
+    private Role role;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;

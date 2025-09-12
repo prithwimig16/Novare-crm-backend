@@ -7,6 +7,7 @@ import com.medwiz.novare_crm.dto.request.UserRequest;
 import com.medwiz.novare_crm.dto.response.LoginResponse;
 import com.medwiz.novare_crm.dto.response.RefreshTokenResponse;
 import com.medwiz.novare_crm.entity.User;
+import com.medwiz.novare_crm.enums.Role;
 import com.medwiz.novare_crm.exception.LoginException;
 import com.medwiz.novare_crm.exception.RegistrationException;
 import com.medwiz.novare_crm.keycloak.KeycloakAdminService;
@@ -35,19 +36,23 @@ public class AuthService {
         Map<String, Object> tokenResponse;
         try {
             tokenResponse = keycloakAdminService.getUserToken(
-                    request.getPhoneNumber(),
+                    request.getContact(),
                     request.getPassword()
             );
         } catch (Exception ex) {
             log.error("❌ Keycloak Error", ex);
             if (ex.getMessage() != null && ex.getMessage().contains("401")) {
-                throw new LoginException("Wrong username or password!", ex);
+                throw new LoginException( ex.getMessage());
             }
-            throw new LoginException("Authentication server unavailable!", ex);
+            throw new LoginException( ex.getMessage());
         }
 
-        User user = userRepository.findByPhoneNumber(request.getPhoneNumber())
+        User user = userRepository.findByPhoneNumber(request.getContact())
                 .orElseThrow(() -> new LoginException("User metadata not found"));
+
+        if(user.getRole()!= Role.ADMIN){
+            throw new LoginException("Wrong username or password!");
+        }
 
         String sessionId = sessionService.createOrUpdateSession(user.getId());
 
@@ -55,6 +60,7 @@ public class AuthService {
                 .userId(user.getId())
                 .firstName(user.getFirstname())
                 .lastName(user.getLastname())
+                .role(user.getRole())
                 .sessionId(sessionId)
                 .isVerified(user.isVerified())
                 .isActive(user.isActive())

@@ -22,15 +22,15 @@ public class AdminBootstrapConfig {
 
     private static final String ADMIN_PHONE = "9436920412";
     private static final String ADMIN_EMAIL = "admin@system.com";
-    private static final String ADMIN_PASSWORD = "Admin@123"; // ⚠️ Store securely (env var/Secrets Manager)
+    private static final String ADMIN_PASSWORD = "Admin@123";
 
     @Bean
     public ApplicationRunner createDefaultAdmin() {
         return args -> {
             try {
                 // 1. Check if admin already exists in DB
-                if (userRepository.findByPhoneNumber(ADMIN_EMAIL).isPresent()) {
-                    log.info("✅ Default admin already exists: {}", ADMIN_EMAIL);
+                if (userRepository.findByPhoneNumber(ADMIN_PHONE).isPresent()) {
+                    log.info("✅ Default admin already exists: {}", ADMIN_PHONE);
                     return;
                 }
 
@@ -51,6 +51,7 @@ public class AdminBootstrapConfig {
                         .id(keycloakUserId)
                         .firstname("System")
                         .lastname("Admin")
+                        .role(Role.ADMIN)
                         .phoneNumber(ADMIN_PHONE)
                         .email(ADMIN_EMAIL)
                         .isActive(true)

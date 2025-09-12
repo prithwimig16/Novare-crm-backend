@@ -51,7 +51,7 @@ public class RetreatController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")   // ✅ Only admins can call this
+   // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<PaginatedResponse<RetreatRegistrationResponse>>> list(
             @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam(required = false) Goal goal,
