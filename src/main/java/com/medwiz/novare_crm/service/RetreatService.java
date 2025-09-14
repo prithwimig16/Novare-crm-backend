@@ -15,6 +15,7 @@ import com.medwiz.novare_crm.keycloak.KeycloakAdminService;
 import com.medwiz.novare_crm.repository.MemberProfileRepository;
 import com.medwiz.novare_crm.repository.RetreatRegistrationRepository;
 import com.medwiz.novare_crm.repository.UserRepository;
+import com.medwiz.novare_crm.utils.DateTimeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -42,24 +43,31 @@ public class RetreatService {
     @Transactional
     public String registerMemberForFirstRetreat(RetreatRegistrationRequest request) {
         String keycloakUserId = null;
-        try {
-            // Create in Keycloak
-            keycloakAdminService.createUser(
-                    request.firstName(),
-                    request.lastName(),
-                    request.phoneNumber(),
-                    request.email(),
-                    request.password()
-            );
-            keycloakUserId = keycloakAdminService.getUserIdByUsername(request.phoneNumber());
-            keycloakAdminService.assignRole(keycloakUserId, Role.DOCTOR);
+        User userByEmail = userRepository.findUserByEmail(request.email());
 
-            // Save User
-            User user = saveUserEntity(keycloakUserId, request,Role.MEMBER);
-            // Save Profile
-            MemberProfile profile = saveMemberProfile(keycloakUserId, request);
-            // Save RetreatRegistration
-            saveRetreatRegistration(profile, request);
+        try {
+            if(userByEmail!=null){
+                registerForRetreat(userByEmail.getId(),request);
+            }
+            else {
+                // Create in Keycloak
+                keycloakAdminService.createUser(
+                        request.firstName(),
+                        request.lastName(),
+                        request.phoneNumber(),
+                        request.email(),
+                        request.password()
+                );
+                keycloakUserId = keycloakAdminService.getUserIdByUsername(request.phoneNumber());
+                keycloakAdminService.assignRole(keycloakUserId, Role.DOCTOR);
+
+                // Save User
+                User user = saveUserEntity(keycloakUserId, request,Role.MEMBER);
+                // Save Profile
+                MemberProfile profile = saveMemberProfile(keycloakUserId, request);
+                // Save RetreatRegistration
+                saveRetreatRegistration(profile, request);
+            }
 
             return "Member registered and retreat booked successfully";
         } catch (Exception ex) {
@@ -186,6 +194,7 @@ public class RetreatService {
                 .additionalDetails(r.getAdditionalDetails())
                 .age(r.getAge())
                 .gender(r.getGender())
+                .date(DateTimeUtil.formatNiceDate(r.getCreatedAt()))
                 .memberName(memberName)
                 .memberEmail(memberEmail)
                 .build();
