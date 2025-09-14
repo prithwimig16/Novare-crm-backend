@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -46,6 +47,15 @@ public class RetreatRegistration {
     private Gender gender;
 
     private String transactionId;
+
+    @Builder.Default
+    @Column
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Builder.Default
+    @Column
+    private LocalDateTime updatedAt = LocalDateTime.now();
+
 
 
 }

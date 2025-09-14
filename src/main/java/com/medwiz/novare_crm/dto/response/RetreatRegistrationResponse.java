@@ -17,6 +17,7 @@ public record RetreatRegistrationResponse(
         int age,
         Gender gender,
         String memberName,
-        String memberEmail
+        String memberEmail,
+        String date
 ) {}
 
