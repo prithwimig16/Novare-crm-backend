@@ -28,7 +28,10 @@ public class AuthController {
     private final KeycloakAdminService keycloakAdminService;
 
 
-
+    @GetMapping("/prithwi")
+    public ResponseEntity<ApiResponse<String>> prithwiTest() {
+        return ResponseEntity.ok(ApiResponse.ok("Novare is working now!", null));
+    }
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<LoginResponse>> login(@RequestBody @Valid LoginRequest request) {
         LoginResponse loginResponse = authService.login(request);

@@ -69,7 +69,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173","http://127.0.0.1:5173")); // 👈 frontend URL
+        config.setAllowedOrigins(List.of("http://localhost:5173",
+                "http://127.0.0.1:5173",
+                "https://api.novareretreats.com",
+                "https://www.novareretreats.com",
+                "https://novareretreats.com"));
         config.setExposedHeaders(List.of("Authorization", "Content-Disposition"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
