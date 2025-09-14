@@ -1,0 +1,43 @@
+# App identity
+spring.application.name=novare-crm
+server.port=${PORT:8081}
+app.base-url=${DOMAIN_NAME:http://localhost:8080}
+# PostgreSQL Configuration
+
+spring.datasource.url=${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/novare_crm}
+
+spring.datasource.username=${DB_USERNAME:postgres}
+spring.datasource.password=${DB_PASSWORD:admin}
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# JPA & Hibernate
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.jdbc.time_zone=UTC
+
+#KeyCloak
+keycloak.realm=novare-realm
+keycloak.base-url=http://localhost:8080
+keycloak.client-id=novare-backend
+keycloak.client-secret=rRFC90m5KDISCZ8nt988ZnUBTLtEzcTS
+
+# Spring Mail Configuration
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+#spring.mail.username=${gmail_username}
+#spring.mail.password=${gmail_password}
+
+spring.mail.username=hello@prithwiraj.in
+spring.mail.password=myPassword
+
+spring.mail.properties.mail.smtp.connectiontimeout=5000
+spring.mail.properties.mail.smtp.timeout=5000
+spring.mail.properties.mail.smtp.writetimeout=5000
+logging.level.org.springframework.mail=DEBUG
+
+
+
+
+
+
